@@ -1,7 +1,13 @@
+* {
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+}
 .App {
 	text-align: center;
+	width: 100%;
+	height: 100%;
 }
-
 .ItemList,
 .Item {
 	display: flex;
@@ -70,6 +76,23 @@ header h1 {
 .AddItemBtn:hover {
 	transform: scale(1.1);
 }
+footer {
+	color: rgb(207, 197, 197);
+	background-color: rgb(35, 30, 31);
+	align-items: center;
+	text-align: center;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	font-size: 1.5vh;
+	bottom: 0;
+	position: fixed;
+	width: 100%;
+}
+footer a {
+	text-decoration: underline;
+	decoration: none;
+	color: rgb(235, 124, 83);
+}
+
 /* mobile responsiveness */
 @media only screen and (min-width: 320px) and (max-width: 575px) {
 	nav {

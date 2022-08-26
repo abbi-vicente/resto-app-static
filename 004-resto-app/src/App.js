@@ -337,6 +337,15 @@ const App = () => {
 				/>
 			</Routes>
 			<br />
+			<footer>
+				<p>© 2022 Arigasteak</p>
+				<p>
+					Photo credits
+					<a href="https://www.facebook.com/thesteakcartel/" target="_blank">
+						The Steak Cartel
+					</a>
+				</p>
+			</footer>
 		</div>
 	);
 };

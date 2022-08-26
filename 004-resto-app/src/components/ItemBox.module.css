@@ -2,8 +2,8 @@
 .Item {
 	border: darkgrey 1px solid;
 	display: flex;
-	height: 200px;
-	width: 450px;
+	height: 100%;
+	width: 30%;
 	flex-wrap: wrap;
 	padding: 10px;
 }
