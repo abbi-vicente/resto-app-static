@@ -1,30 +1,31 @@
 import "./App.css";
-import React, {useReducer} from "react";
+import React, { useReducer } from "react";
 import ItemBox from "./components/ItemBox";
 import FilterCartItem from "./components/FilterCartItem";
 import NewItem from "./components/NewItem";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import EditItemForm from "./components/EditItemForm";
 import CartItems from "./components/CartItems";
-import {Routes, Route} from "react-router";
-import {Link} from "react-router-dom";
+import { Routes, Route } from "react-router";
+import { Link } from "react-router-dom";
 
 const App = () => {
 	const initialState = {
 		items: [
 			{
 				id: uuidv4(),
-				name: "Dry Aged Prime Rib",
+				name: "Prime USDA Ribeye",
 				price: 450,
 				category: "Food",
-				image: "https://bit.ly/3TdN6hD",
+				image: "https://lemiapp.com/api/v3/fullsize?url=https://lemiapp.com/uploads/picture-1620781250111",
 			},
 			{
 				id: uuidv4(),
 				name: "Wagyu Burger",
 				price: 250,
 				category: "Food",
-				image: "https://bit.ly/3pFH1NA",
+				image:
+					"https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1022,h_1024/https://happyandbusytravels.com/wp-content/uploads/2021/06/The-Steak-Cartel-Calamba-Laguna-26-Super-Onion-Happy-and-Busy-Travels.jpeg",
 			},
 			{
 				id: uuidv4(),
@@ -38,7 +39,8 @@ const App = () => {
 				name: "Wagyu Cubes",
 				price: 150,
 				category: "Appetizer",
-				image: "https://bit.ly/3RaAeXI",
+				image:
+					"https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1024,h_768/https://happyandbusytravels.com/wp-content/uploads/2021/06/The-Steak-Cartel-Calamba-Laguna-17-Wagyu-Skewers-Happy-and-Busy-Travels.jpeg",
 			},
 			{
 				id: uuidv4(),
@@ -116,12 +118,12 @@ const App = () => {
 				});
 				const saveCartChanges = state.cartItem.map((item) => {
 					if (item.id === action.payload.id) {
-						return {...item, ...action.payload};
+						return { ...item, ...action.payload };
 					}
 					return item;
 				});
 
-				return {...state, items: saveChanges, cartItem: saveCartChanges};
+				return { ...state, items: saveChanges, cartItem: saveCartChanges };
 			}
 			case "DELETE_ITEM": {
 				return {
@@ -135,12 +137,12 @@ const App = () => {
 					return action.payload.id === item.id;
 				});
 				if (cartIndex <= -1) {
-					cartCopy.push({...action.payload, quantity: 1});
+					cartCopy.push({ ...action.payload, quantity: 1 });
 				} else {
 					cartCopy[cartIndex].quantity = cartCopy[cartIndex].quantity + 1;
 				}
 				const cartTotal = state.cartTotal + action.payload.price;
-				return {...state, cartTotal, cartItem: cartCopy};
+				return { ...state, cartTotal, cartItem: cartCopy };
 			}
 			case "INCREMENT_COUNTER": {
 				const cartCopy = [...state.cartItem];
@@ -153,7 +155,7 @@ const App = () => {
 
 				const cartTotal = state.cartTotal + cartCopy[cartIndex].price;
 
-				return {...state, cartItem: [...cartCopy], cartTotal};
+				return { ...state, cartItem: [...cartCopy], cartTotal };
 			}
 			case "DECREMENT_COUNTER": {
 				const cartCopy = [...state.cartItem];
@@ -169,7 +171,7 @@ const App = () => {
 					cartCopy.splice(cartIndex, 1);
 				}
 
-				return {...state, cartItem: [...cartCopy], cartTotal};
+				return { ...state, cartItem: [...cartCopy], cartTotal };
 			}
 			case "DELETE_CART_ITEM": {
 				return {
@@ -193,7 +195,7 @@ const App = () => {
 	}, []);
 
 	const filterCategory = (category) => {
-		dispatch({type: "SET_CATEGORY", payload: category});
+		dispatch({ type: "SET_CATEGORY", payload: category });
 	};
 
 	let filteredItems =
@@ -205,26 +207,26 @@ const App = () => {
 
 	const showAddItemForm = () => {
 		state.newItem
-			? dispatch({type: "SHOW_NEW_FORM", payload: false})
-			: dispatch({type: "SHOW_NEW_FORM", payload: true});
+			? dispatch({ type: "SHOW_NEW_FORM", payload: false })
+			: dispatch({ type: "SHOW_NEW_FORM", payload: true });
 	};
 
 	const showEditItemForm = (status, id) => {
 		state.editItem
-			? dispatch({type: "SHOW_EDIT_FORM", payload: false})
-			: dispatch({type: "SHOW_EDIT_FORM", payload: status});
+			? dispatch({ type: "SHOW_EDIT_FORM", payload: false })
+			: dispatch({ type: "SHOW_EDIT_FORM", payload: status });
 
 		const indexOfItem = state.items.findIndex((item) => item.id === id);
 		const listItems = [...state.items];
-		dispatch({type: "EDIT_ITEM_DETAIL", payload: listItems.splice(indexOfItem, 1)});
+		dispatch({ type: "EDIT_ITEM_DETAIL", payload: listItems.splice(indexOfItem, 1) });
 	};
 
 	const hideNewItemForm = (status) => {
-		dispatch({type: "SHOW_NEW_FORM", payload: status});
+		dispatch({ type: "SHOW_NEW_FORM", payload: status });
 	};
 
 	const hideEditItemForm = (status) => {
-		dispatch({type: "SHOW_EDIT_FORM", payload: status});
+		dispatch({ type: "SHOW_EDIT_FORM", payload: status });
 	};
 
 	const getCartTotal = () => {
